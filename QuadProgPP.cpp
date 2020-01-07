@@ -640,8 +640,8 @@ bool add_constraint(Ref<MatrixXd> R, Ref<MatrixXd> J, Ref<VectorXd> d, int& iq, 
     cc = cc / h;
     d[j-1] = h;
 
-    Ref<VectorXd> J0 = J.col(j-1);
-    Ref<VectorXd> J1 = J.col(j);
+    auto J0 = J.col(j-1);
+    auto J1 = J.col(j);
     internal::apply_rotation_in_the_plane(J0, J1, JacobiRotation<double>(cc,ss));
   }
   // update the number of constraints added
@@ -717,8 +717,8 @@ void delete_constraint(Ref<MatrixXd> R, Ref<MatrixXd> J, VectorXi& A, Ref<Vector
     Ref<VectorXd,0,InnerStride<> > R1 = R.row(j+1).segment(j+1,iq-j-1);;
     internal::apply_rotation_in_the_plane(R0, R1, JacobiRotation<double>(cc,ss));
 
-    Ref<VectorXd> J0 = J.col(j);
-    Ref<VectorXd> J1 = J.col(j+1);
+    auto J0 = J.col(j);
+    auto J1 = J.col(j+1);
     internal::apply_rotation_in_the_plane(J0, J1, JacobiRotation<double>(cc,ss));
   }
 }
